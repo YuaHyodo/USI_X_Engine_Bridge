@@ -30,11 +30,12 @@ class USI_X_Engine_Bridge:
     def __init__(self, engine_path):
         self.engine_path = engine_path
         self.info_get = False
+        self.engine_message_list = []
         self.load_engine()
 
     def load_engine(self):
-        self.engine = subpro.Popen(self.engine_path, stdin=subpro.PIPE, stdout=sbpro.PIPE,
-                                   universal_newlines=True, bifsize=1)
+        self.engine = subpro.Popen(self.engine_path, stdin=subpro.PIPE, stdout=subpro.PIPE,
+                                   universal_newlines=True, bufsize=1)
         self.send('usi')
         self.recv_word('usiok')
         return
@@ -42,7 +43,7 @@ class USI_X_Engine_Bridge:
     def send(self, command):
         if k not in command:
             command += k
-        self.engine.stdin_write(command)
+        self.engine.stdin.write(command)
         return
 
     def recv(self):
@@ -58,7 +59,7 @@ class USI_X_Engine_Bridge:
                 self.engine_message_list.append(w)
         return w
 
-    def think(self, positon, btime=1000, wtime=1000, binc=1000, winc=1000, byoyomi=0):
+    def think(self, position, btime=1000, wtime=1000, binc=1000, winc=1000, byoyomi=0):
         command = 'position ' + position
         self.send(command)
         command = 'go btime ' + str(btime) + ' wtime ' + str(wtime) + ' binc ' + str(binc) + ' winc ' + str(winc) + ' byoyomi ' + str(byoyomi)
@@ -71,7 +72,7 @@ class USI_X_Engine_Bridge:
         return bestmove[9] + bestmove[10]
 
     def setoption(self, name, value):
-        self.send('setoption name ' + str(name) ' value ' + str(value))
+        self.send('setoption name ' + str(name) + ' value ' + str(value))
         return
 
     def stop(self):
