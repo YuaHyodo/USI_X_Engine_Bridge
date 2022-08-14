@@ -6,7 +6,8 @@ Interface between USI-X_Othello engine and Python programs
 
 # みなさんの環境で使えるようにする方法
 - USI_X_Engine_Bridgeは、Azisai_Othello_GUI( https://github.com/YuaHyodo/Azisai_Othello_GUI )などを実行するのに必要です。
-
+- 注意: 間違っているやり方の可能性が非常に高い
+- 間違いの指摘を大募集
 ## 手順
 - 1: ダウンロードする
 - 2: コマンドプロンプトを開く
