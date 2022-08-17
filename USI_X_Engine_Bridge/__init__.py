@@ -40,6 +40,12 @@ class USI_X_Engine_Bridge:
         self.recv_word('usiok')
         return
 
+    def NewGame(self):
+        self.send('isready')
+        self.recv_word('readyok')
+        self.send('usinewgame')
+        return
+
     def send(self, command):
         if k not in command:
             command += k
@@ -65,7 +71,7 @@ class USI_X_Engine_Bridge:
         command = 'go btime ' + str(btime) + ' wtime ' + str(wtime) + ' binc ' + str(binc) + ' winc ' + str(winc) + ' byoyomi ' + str(byoyomi)
         self.send(command)
         bestmove = self.recv_word('bestmove')
-        if 'pass' in bestmove:
+        if 'pass' in bestmove[0:13]:
             return 'pass'
         if 'resign' in bestmove:
             return 'resign'
