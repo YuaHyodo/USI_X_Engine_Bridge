@@ -22,5 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-setup(name='USI_X_Engine_Bridge', version='0.0.1', description='Interface between USI-X_Othello engine and Python programs',
+from distutils.core import setup
+
+setup(name='USI_X_Engine_Bridge', version='0.0.2', description='Interface between USI-X_Othello engine and Python programs',
          auther='Yua Hyodo', url='https://github.com/YuaHyodo/USI_X_Engine_Bridge', packages=['USI_X_Engine_Bridge'])
