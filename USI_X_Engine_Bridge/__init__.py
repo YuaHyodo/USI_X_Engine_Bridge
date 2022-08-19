@@ -31,6 +31,7 @@ class USI_X_Engine_Bridge:
         self.engine_path = engine_path
         self.info_get = False
         self.engine_message_list = []
+        self.evaluation = []
         self.load_engine()
 
     def load_engine(self):
@@ -44,6 +45,7 @@ class USI_X_Engine_Bridge:
         self.send('isready')
         self.recv_word('readyok')
         self.send('usinewgame')
+        self.evaluation = []
         return
 
     def send(self, command):
@@ -63,9 +65,15 @@ class USI_X_Engine_Bridge:
                 break
             if 'info' in w and self.info_get:
                 self.engine_message_list.append(w)
+                w2 = w.split(' ')
+                for i in range(len(w2)):
+                    if 'score' in w2[i]:
+                        self.evaluation[-1] = float(w2[i + 1])
+                        break
         return w
 
     def think(self, position, btime=1000, wtime=1000, binc=1000, winc=1000, byoyomi=0):
+        self.evaluation.append(0)
         command = 'position ' + position
         self.send(command)
         command = 'go btime ' + str(btime) + ' wtime ' + str(wtime) + ' binc ' + str(binc) + ' winc ' + str(winc) + ' byoyomi ' + str(byoyomi)
