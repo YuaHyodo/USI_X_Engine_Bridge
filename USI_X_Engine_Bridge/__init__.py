@@ -23,6 +23,7 @@ SOFTWARE.
 """
 
 import subprocess as subpro
+import os
 
 k = '\n'
 
@@ -35,8 +36,10 @@ class USI_X_Engine_Bridge:
         self.load_engine()
 
     def load_engine(self):
+        cwd = os.path.dirname(self.engine_path)
+        cwd = cwd if cwd != '' else None
         self.engine = subpro.Popen(self.engine_path, stdin=subpro.PIPE, stdout=subpro.PIPE,
-                                   universal_newlines=True, bufsize=1)
+                                   universal_newlines=True, bufsize=1, cwd=cwd)
         self.send('usi')
         self.recv_word('usiok')
         return
