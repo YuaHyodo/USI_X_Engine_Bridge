@@ -24,5 +24,5 @@ SOFTWARE.
 
 from distutils.core import setup
 
-setup(name='USI_X_Engine_Bridge', version='0.0.2', description='Interface between USI-X_Othello engine and Python programs',
+setup(name='USI_X_Engine_Bridge', version='0.0.3', description='Interface between USI-X_Othello engine and Python programs',
          auther='Yua Hyodo', url='https://github.com/YuaHyodo/USI_X_Engine_Bridge', packages=['USI_X_Engine_Bridge'])
