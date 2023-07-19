@@ -104,6 +104,7 @@ class USI_X_Engine_Bridge:
         r = self.engine.stdout.readline()
         if 'bestmove' in r.split(' ')[0]:
             w = '<usix_recv> | ' + str(datetime.now()) + ' | ' + r
+            self.write_log(w)
             move = r.split(' ')[1]
         else:
             move = self.recv_word('bestmove', get_bestmove=True).split(' ')[1]
